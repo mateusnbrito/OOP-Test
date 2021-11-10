@@ -171,7 +171,7 @@ public class Main {
               Aluno aluno = curso.getAlunos()[l];
 
               if(aluno.getMatricula() == _matriculaAluno){
-                aluno.addDisciplinaAtiva(disciplina);
+                aluno.addDisciplina(disciplina);
                 disciplina.addAluno(aluno);
 
                 optionalValue = Optional.ofNullable(aluno);
@@ -286,6 +286,35 @@ public class Main {
 
       if(curso.getNome().equals(_nomeCurso)){
         optionalValue = Optional.ofNullable(curso.getAlunos());
+      }
+    }
+
+    return optionalValue;
+  }
+
+  public Optional<Boolean> getStatusConclusaoAluno(String _nomeCurso, int _numeroMatricula){
+    Optional<Boolean> optionalValue = null;
+    Boolean disciplinasConcluidas = false;
+
+    for(int i=0; i<cursos.length; i++){
+      Curso curso = cursos[i];
+
+      if(curso.getNome().equals(_nomeCurso)){
+        for(int j=0; j<(curso.getAlunos()).length; j++){
+          Aluno aluno = curso.getAlunos()[j];
+  
+          if(aluno.getMatricula() == _numeroMatricula){
+            for(int l=0; l<(aluno.getdisciplinas()).length; l++){
+              Disciplina disciplina = aluno.getdisciplinas()[l];
+  
+              if(disciplina.getStatusConclusao()){
+                disciplinasConcluidas = true;
+              }
+            }
+          }
+        }
+
+        optionalValue = Optional.ofNullable(disciplinasConcluidas);
       }
     }
 

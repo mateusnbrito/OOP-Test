@@ -4,16 +4,18 @@ public class Disciplina {
   private int codigo;
 	private String sigla;
 	private String nome;
+  private String docente;
+  private Boolean statusConclusão;
 	private Aula[] aulas = {};
   private Aluno[] alunos = {};
   private Nota[] notas = {};
-  private Boolean statusConclusão;
 
-	Disciplina(int _codigo, String _sigla, String _nome){
+	Disciplina(int _codigo, String _sigla, String _nome, String _docente){
 		this.codigo = _codigo;
 		this.sigla = _sigla;
 		this.nome = _nome;
     this.statusConclusão = false;
+    this.docente = _docente;
 	}
 
 	public void setCodigo(int _codigo){
@@ -26,6 +28,10 @@ public class Disciplina {
 
 	public void setNome(String _nome){
 		this.nome = _nome;
+	}
+
+  public void setDocente(String _docente){
+		this.docente = _docente;
 	}
 
   public void setStatusConclusao(Boolean _status){
@@ -59,6 +65,14 @@ public class Disciplina {
 		return this.nome;
 	}
 
+	public String getDocente(){
+		return this.docente;
+	}
+
+  public Boolean getStatusConclusao(){
+		return this.statusConclusão;
+	}
+
 	public Aula[] getAulas(){
 		return this.aulas;
 	}
@@ -69,9 +83,5 @@ public class Disciplina {
 
   public Nota[] getNotas(){
 		return this.notas;
-	}
-
-  public Boolean getStatusConclusao(){
-		return this.statusConclusão;
 	}
 }

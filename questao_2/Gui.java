@@ -405,6 +405,7 @@ public class Gui extends JFrame{
       int input1Content;
       String input2Content;
       String input3Content;
+      String input4Content;
 
 			public void actionPerformed(ActionEvent event) {
         contentPane.removeAll();
@@ -416,16 +417,19 @@ public class Gui extends JFrame{
         JLabel textInputLabel1 = new JLabel("Código da Disciplina");
         JLabel textInputLabel2 = new JLabel("Sigla da Disciplina");
         JLabel textInputLabel3 = new JLabel("Nome da Disciplina");
+        JLabel textInputLabel4 = new JLabel("Nome do Docente");
         JTextField textInputField0 = new JTextField();
         JTextField textInputField1 = new JTextField();
         JTextField textInputField2 = new JTextField();
         JTextField textInputField3 = new JTextField();
+        JTextField textInputField4 = new JTextField();
         JButton textInputButton = new JButton("Enviar");
 
         textInputField0.setPreferredSize(new Dimension(200, 24));
         textInputField1.setPreferredSize(new Dimension(200, 24));
         textInputField2.setPreferredSize(new Dimension(200, 24));
         textInputField3.setPreferredSize(new Dimension(200, 24));
+        textInputField4.setPreferredSize(new Dimension(200, 24));
 
         textInputPanel.add(textInputLabel0);
         textInputPanel.add(textInputField0);
@@ -435,6 +439,8 @@ public class Gui extends JFrame{
         textInputPanel.add(textInputField2);
         textInputPanel.add(textInputLabel3);
         textInputPanel.add(textInputField3);
+        textInputPanel.add(textInputLabel4);
+        textInputPanel.add(textInputField4);
 
         contentPane.add(textInputPanel);
         contentPane.add(textInputButton);
@@ -447,8 +453,9 @@ public class Gui extends JFrame{
             input1Content = Integer.parseInt(textInputField1.getText().toString());
             input2Content = textInputField2.getText().toString();
             input3Content = textInputField3.getText().toString();
+            input4Content = textInputField4.getText().toString();
 
-            disciplina = main.criarDisciplina(input0Content, input1Content, input2Content, input3Content);
+            disciplina = main.criarDisciplina(input0Content, input1Content, input2Content, input3Content, input4Content);
 
             try {
               System.out.println(disciplina.get().getCodigo());
@@ -468,7 +475,7 @@ public class Gui extends JFrame{
     option8.addActionListener((ActionListener) new ActionListener(){
       Optional<Disciplina[]> disciplinas;
       String input0Content;
-      String[] colunas = {"Codigo", "Sigla", "Nome"};
+      String[] colunas = {"Codigo", "Sigla", "Nome", "Docente"};
       Object[][] dados = {};
 
       public void limparDados(){
@@ -505,7 +512,7 @@ public class Gui extends JFrame{
               for(int i=0; i<disciplinas.get().length; i++){
                 Disciplina disciplina = disciplinas.get()[i];
 
-                String[] disciplinaNome = {Integer.toString(disciplina.getCodigo()), disciplina.getSigla(), disciplina.getNome()};
+                String[] disciplinaNome = {Integer.toString(disciplina.getCodigo()), disciplina.getSigla(), disciplina.getNome(), disciplina.getDocente()};
 
                 dados = Arrays.copyOf(dados, (dados.length)+1);
                 dados[(dados.length)-1] = disciplinaNome;
@@ -534,6 +541,7 @@ public class Gui extends JFrame{
       int input2Content;
       String input3Content;
       String input4Content;
+      String input5Content;
 
 			public void actionPerformed(ActionEvent event) {
         contentPane.removeAll();
@@ -546,11 +554,13 @@ public class Gui extends JFrame{
         JLabel textInputLabel2 = new JLabel("Código da Nova Disciplina");
         JLabel textInputLabel3 = new JLabel("Sigla da Disciplina");
         JLabel textInputLabel4 = new JLabel("Nome da Disciplina");
+        JLabel textInputLabel5 = new JLabel("Nome do Docente");
         JTextField textInputField0 = new JTextField();
         JTextField textInputField1 = new JTextField();
         JTextField textInputField2 = new JTextField();
         JTextField textInputField3 = new JTextField();
         JTextField textInputField4 = new JTextField();
+        JTextField textInputField5 = new JTextField();
         JButton textInputButton = new JButton("Enviar");
 
         textInputField0.setPreferredSize(new Dimension(200, 24));
@@ -558,6 +568,7 @@ public class Gui extends JFrame{
         textInputField2.setPreferredSize(new Dimension(200, 24));
         textInputField3.setPreferredSize(new Dimension(200, 24));
         textInputField4.setPreferredSize(new Dimension(200, 24));
+        textInputField5.setPreferredSize(new Dimension(200, 24));
 
         textInputPanel.add(textInputLabel0);
         textInputPanel.add(textInputField0);
@@ -569,6 +580,8 @@ public class Gui extends JFrame{
         textInputPanel.add(textInputField3);
         textInputPanel.add(textInputLabel4);
         textInputPanel.add(textInputField4);
+        textInputPanel.add(textInputLabel5);
+        textInputPanel.add(textInputField5);
 
         contentPane.add(textInputPanel);
         contentPane.add(textInputButton);
@@ -582,8 +595,9 @@ public class Gui extends JFrame{
             input2Content = Integer.parseInt(textInputField2.getText().toString());
             input3Content = textInputField3.getText().toString();
             input4Content = textInputField4.getText().toString();
+            input5Content = textInputField5.getText().toString();
 
-            disciplina = main.updateDisciplina(input0Content, input1Content, input2Content, input3Content, input4Content);
+            disciplina = main.updateDisciplina(input0Content, input1Content, input2Content, input3Content, input4Content, input5Content);
 
             try {
               System.out.println(disciplina.get().getCodigo());

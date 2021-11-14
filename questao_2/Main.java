@@ -10,7 +10,6 @@ public class Main {
     Gui gui = new Gui();
 	}
 
-  // Implementação do docente nas disciplinas
   // Limitar 1 docente por disciplina em um curso
   // Implementar disciplinas realizadas
   // Graduar a ex-aluno quando completar disciplinas
@@ -57,7 +56,7 @@ public class Main {
   }
 
   // Método que cria uma nova disciplina
-  public Optional<Disciplina> criarDisciplina(String _nomeCurso, int _codigo, String _sigla, String _nome){
+  public Optional<Disciplina> criarDisciplina(String _nomeCurso, int _codigo, String _sigla, String _nome, String _docente){
     Optional<Disciplina> optionalValue = null;
     Boolean valorRepetido = false;
 
@@ -73,7 +72,7 @@ public class Main {
       }
 
       if(curso.getNome().equals(_nomeCurso) && !valorRepetido){
-        Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome);
+        Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome, _docente);
 
         curso.addDisciplina(novaDisciplina);
         optionalValue = Optional.ofNullable(novaDisciplina);
@@ -99,7 +98,7 @@ public class Main {
   }
 
   // Método que atualiza uma disciplina de um curso
-  public Optional<Disciplina> updateDisciplina(String _nomeCurso, int _antigoCodigoDisciplina, int _novoCodigoDisciplina, String _sigla, String _nome){
+  public Optional<Disciplina> updateDisciplina(String _nomeCurso, int _antigoCodigoDisciplina, int _novoCodigoDisciplina, String _sigla, String _nome, String _docente){
     Optional<Disciplina> optionalValue = null;
 
     for(int i=0; i<cursos.length; i++){
@@ -114,6 +113,7 @@ public class Main {
             disciplina.setCodigo(_novoCodigoDisciplina);
             disciplina.setSigla(_sigla);
             disciplina.setNome(_nome);
+            disciplina.setDocente(_docente);
 
             optionalValue = Optional.ofNullable(disciplina);
           }

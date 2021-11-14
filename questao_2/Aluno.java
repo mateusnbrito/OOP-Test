@@ -3,18 +3,24 @@ import java.util.Arrays;
 public class Aluno {
   private int matricula;
 	private Curso curso;
+  private Boolean eExAluno;
 	private Disciplina[] disciplinas = {};
 
 	Aluno(int _matricula, Curso _curso){
 		this.matricula = _matricula;
 		this.curso = _curso;
+    this.eExAluno = false;
 	}
 
 	public void setMatricula(int _matricula){
 		this.matricula = _matricula;
 	}
 
-	public void setCurso(Curso _curso){
+	public void setStatusConclusao(Boolean _eExAluno){
+		this.eExAluno = _eExAluno;
+	}
+
+  public void setCurso(Curso _curso){
 		this.curso = _curso;
 	}
 
@@ -39,6 +45,10 @@ public class Aluno {
 
 	public Curso getCurso(){
 		return this.curso;
+	}
+
+  public Boolean getStatusConclusao(){
+		return this.eExAluno;
 	}
 
 	public Disciplina[] getdisciplinas(){

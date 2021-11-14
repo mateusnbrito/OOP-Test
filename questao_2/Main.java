@@ -323,7 +323,6 @@ public class Main {
   // Método que lista o status de conclusão de um aluno
   public Optional<Boolean> getStatusConclusaoAluno(String _nomeCurso, int _numeroMatricula){
     Optional<Boolean> optionalValue = null;
-    Boolean disciplinasConcluidas = false;
 
     for(int i=0; i<cursos.length; i++){
       Curso curso = cursos[i];
@@ -331,19 +330,19 @@ public class Main {
       if(curso.getNome().equals(_nomeCurso)){
         for(int j=0; j<(curso.getAlunos()).length; j++){
           Aluno aluno = curso.getAlunos()[j];
-  
+
           if(aluno.getMatricula() == _numeroMatricula){
             for(int l=0; l<(aluno.getdisciplinas()).length; l++){
               Disciplina disciplina = aluno.getdisciplinas()[l];
-  
+
               if(disciplina.getStatusConclusao()){
-                disciplinasConcluidas = true;
+                aluno.setStatusConclusao(true);
+
+                optionalValue = Optional.ofNullable(aluno.getStatusConclusao());
               }
             }
           }
         }
-
-        optionalValue = Optional.ofNullable(disciplinasConcluidas);
       }
     }
 
@@ -366,7 +365,7 @@ public class Main {
   }
 
   // Método que cria aula de uma disciplina
-  public Optional<Aula> criarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, Double _duracao){
+  public Optional<Aula> criarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim){
     Optional<Aula> optionalValue = null;
 
     for(int i=0; i<cursos.length; i++){
@@ -377,7 +376,7 @@ public class Main {
           Disciplina disciplina = curso.getDisciplinas()[j];
 
           if(disciplina.getCodigo() == _codigoDisciplina){
-            Aula aula = new Aula(_data, _horarioInicio, _horarioFim, _duracao, disciplina);
+            Aula aula = new Aula(_data, _horarioInicio, _horarioFim, disciplina);
 
             disciplina.addAula(aula);
 
@@ -391,7 +390,7 @@ public class Main {
   }
 
   // Método que modifica uma aula de uma disciplina
-  public Optional<Aula> modificarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, Double _duracao){
+  public Optional<Aula> modificarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim){
     Optional<Aula> optionalValue = null;
 
     for(int i=0; i<cursos.length; i++){
@@ -408,7 +407,7 @@ public class Main {
               aula.setData(_data);
               aula.setHorarioInicio(_horarioInicio);
               aula.setHorarioFim(_horarioFim);
-              aula.setDuracao(_duracao);
+              aula.setDuracao(aula.getDuracao());
 
             optionalValue = Optional.ofNullable(aula);
             }

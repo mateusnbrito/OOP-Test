@@ -35,22 +35,23 @@ public class Gui extends JFrame{
 		JMenuItem option0 = new JMenuItem("Sair");
 		JMenuItem option1 = new JMenuItem("Criar curso");
 		JMenuItem option2 = new JMenuItem("Listar cursos");
-		JMenuItem option3 = new JMenuItem("Matricular aluno em um curso");
-		JMenuItem option4 = new JMenuItem("Listar alunos de um curso");
-		JMenuItem option5 = new JMenuItem("Listar ex-alunos de um curso");
-    JMenuItem option6 = new JMenuItem("Listar horários de aula de um curso");
-		JMenuItem option7 = new JMenuItem("Criar disciplina");
-		JMenuItem option8 = new JMenuItem("Listar disciplinas");
-		JMenuItem option9 = new JMenuItem("Modificar disciplina");
-    JMenuItem option10 = new JMenuItem("Remover disciplina");
-		JMenuItem option11 = new JMenuItem("Matricular aluno em uma disciplina");
-		JMenuItem option12 = new JMenuItem("Criar horário de aula de uma disciplina");
-		JMenuItem option13 = new JMenuItem("Listar horários de aula de uma disciplina");
-		JMenuItem option14 = new JMenuItem("Modificar horário de aula de uma disciplina");
-		JMenuItem option15 = new JMenuItem("Inserir nota em uma disciplina");
-		JMenuItem option16 = new JMenuItem("Listar notas em uma disciplina");
-		JMenuItem option17 = new JMenuItem("Listar aulas de um aluno");
-    JMenuItem option18 = new JMenuItem("Listar notas de um aluno");
+		JMenuItem option3 = new JMenuItem("Matricular aluno em um curso (Requer a existência de, ao menos, 1 curso)");
+		JMenuItem option4 = new JMenuItem("Listar alunos de um curso (Requer a existência de, ao menos, 1 curso)");
+		JMenuItem option5 = new JMenuItem("Listar ex-alunos de um curso (Requer a existência de, ao menos, 1 curso)");
+    JMenuItem option6 = new JMenuItem("Listar horários de aula de um curso (Requer a existência de, ao menos, 1 curso)");
+		JMenuItem option7 = new JMenuItem("Criar disciplina (Requer a existência de, ao menos, 1 curso)");
+		JMenuItem option8 = new JMenuItem("Listar disciplinas (Requer a existência de, ao menos, 1 curso)");
+		JMenuItem option9 = new JMenuItem("Modificar disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+    JMenuItem option10 = new JMenuItem("Remover disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option11 = new JMenuItem("Matricular aluno em uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option12 = new JMenuItem("Criar horário de aula de uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option13 = new JMenuItem("Listar horários de aula de uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option14 = new JMenuItem("Modificar horário de aula de uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option15 = new JMenuItem("Inserir nota em uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option16 = new JMenuItem("Listar notas em uma disciplina (Requer a existência de, ao menos, 1 curso e 1 disciplina)");
+		JMenuItem option17 = new JMenuItem("Listar aulas de um aluno (Requer a existência de, ao menos, 1 curso, 1 disciplina, 1 aluno e 1 aula)");
+    JMenuItem option18 = new JMenuItem("Listar notas de um aluno (Requer a existência de, ao menos, 1 curso, 1 disciplina, 1 aluno e 1 nota)");
+    JMenuItem option19 = new JMenuItem("Listar status de conclusão de um aluno (Requer a existência de, ao menos, 1 curso e 1 aluno)");
 
 		setJMenuBar(menuBar);
 
@@ -77,6 +78,7 @@ public class Gui extends JFrame{
     subjectMenu.add(option16);
     studentMenu.add(option17);
     studentMenu.add(option18);
+    studentMenu.add(option19);
 		optionsMenu.add(option0);
 
 		option0.addActionListener((ActionListener) new ActionListener(){
@@ -732,7 +734,6 @@ public class Gui extends JFrame{
       String[] input2Content;
       String[] input3Content;
       String[] input4Content;
-      Double input5Content;
 
 			public void actionPerformed(ActionEvent event) {
         contentPane.removeAll();
@@ -745,13 +746,11 @@ public class Gui extends JFrame{
         JLabel textInputLabel2 = new JLabel("Data da aula (AAAA/MM/DD)");
         JLabel textInputLabel3 = new JLabel("Horário de início da aula (HH:MM)");
         JLabel textInputLabel4 = new JLabel("Horário do fim da aula (HH:MM)");
-        JLabel textInputLabel5 = new JLabel("Duração da aula (HH.MM)");
         JTextField textInputField0 = new JTextField();
         JTextField textInputField1 = new JTextField();
         JTextField textInputField2 = new JTextField();
         JTextField textInputField3 = new JTextField();
         JTextField textInputField4 = new JTextField();
-        JTextField textInputField5 = new JTextField();
         JButton textInputButton = new JButton("Enviar");
 
         textInputField0.setPreferredSize(new Dimension(200, 24));
@@ -759,7 +758,6 @@ public class Gui extends JFrame{
         textInputField2.setPreferredSize(new Dimension(200, 24));
         textInputField3.setPreferredSize(new Dimension(200, 24));
         textInputField4.setPreferredSize(new Dimension(200, 24));
-        textInputField5.setPreferredSize(new Dimension(200, 24));
 
         textInputPanel.add(textInputLabel0);
         textInputPanel.add(textInputField0);
@@ -771,8 +769,6 @@ public class Gui extends JFrame{
         textInputPanel.add(textInputField3);
         textInputPanel.add(textInputLabel4);
         textInputPanel.add(textInputField4);
-        textInputPanel.add(textInputLabel5);
-        textInputPanel.add(textInputField5);
 
         contentPane.add(textInputPanel);
         contentPane.add(textInputButton);
@@ -786,9 +782,8 @@ public class Gui extends JFrame{
             input2Content = (textInputField2.getText().toString()).split("/");
             input3Content = (textInputField3.getText().toString()).split(":");
             input4Content = (textInputField4.getText().toString()).split(":");
-            input5Content = Double.parseDouble(textInputField5.getText().toString());
 
-            aula = main.criarAulaDisciplina(input0Content, input1Content, LocalDate.of(Integer.parseInt(input2Content[0]), Integer.parseInt(input2Content[1]), Integer.parseInt(input2Content[2])), LocalTime.of(Integer.parseInt(input3Content[0]), Integer.parseInt(input3Content[1])), LocalTime.of(Integer.parseInt(input4Content[0]), Integer.parseInt(input4Content[1])), input5Content);
+            aula = main.criarAulaDisciplina(input0Content, input1Content, LocalDate.of(Integer.parseInt(input2Content[0]), Integer.parseInt(input2Content[1]), Integer.parseInt(input2Content[2])), LocalTime.of(Integer.parseInt(input3Content[0]), Integer.parseInt(input3Content[1])), LocalTime.of(Integer.parseInt(input4Content[0]), Integer.parseInt(input4Content[1])));
 
             try {
               System.out.println(aula.get().getHorarioInicio());
@@ -801,7 +796,6 @@ public class Gui extends JFrame{
             textInputField2.setText("");
             textInputField3.setText("");
             textInputField4.setText("");
-            textInputField5.setText("");
           }
         });
 			}
@@ -811,7 +805,7 @@ public class Gui extends JFrame{
       Optional<Aula[]> aulas;
       String input0Content;
       int input1Content;
-      String[] colunas = {"Início", "Fim"};
+      String[] colunas = {"Início", "Fim", "Duração"};
       Object[][] dados = {};
 
       public void limparDados(){
@@ -854,7 +848,7 @@ public class Gui extends JFrame{
               for(int i=0; i<aulas.get().length; i++){
                 Aula aula = aulas.get()[i];
 
-                String[] aulaInicioFim = {(aula.getHorarioInicio()).toString(), (aula.getHorarioFim()).toString()};
+                String[] aulaInicioFim = {(aula.getHorarioInicio()).toString(), (aula.getHorarioFim()).toString(), (aula.getDuracao()).toString()};
 
                 dados = Arrays.copyOf(dados, (dados.length)+1);
                 dados[(dados.length)-1] = aulaInicioFim;
@@ -884,7 +878,6 @@ public class Gui extends JFrame{
       String[] input2Content;
       String[] input3Content;
       String[] input4Content;
-      Double input5Content;
 
 			public void actionPerformed(ActionEvent event) {
         contentPane.removeAll();
@@ -897,13 +890,11 @@ public class Gui extends JFrame{
         JLabel textInputLabel2 = new JLabel("Data da aula");
         JLabel textInputLabel3 = new JLabel("Horário de início da aula");
         JLabel textInputLabel4 = new JLabel("Horário do fim da aula");
-        JLabel textInputLabel5 = new JLabel("Nota");
         JTextField textInputField0 = new JTextField();
         JTextField textInputField1 = new JTextField();
         JTextField textInputField2 = new JTextField();
         JTextField textInputField3 = new JTextField();
         JTextField textInputField4 = new JTextField();
-        JTextField textInputField5 = new JTextField();
         JButton textInputButton = new JButton("Enviar");
 
         textInputField0.setPreferredSize(new Dimension(200, 24));
@@ -911,7 +902,6 @@ public class Gui extends JFrame{
         textInputField2.setPreferredSize(new Dimension(200, 24));
         textInputField3.setPreferredSize(new Dimension(200, 24));
         textInputField4.setPreferredSize(new Dimension(200, 24));
-        textInputField5.setPreferredSize(new Dimension(200, 24));
 
         textInputPanel.add(textInputLabel0);
         textInputPanel.add(textInputField0);
@@ -923,8 +913,6 @@ public class Gui extends JFrame{
         textInputPanel.add(textInputField3);
         textInputPanel.add(textInputLabel4);
         textInputPanel.add(textInputField4);
-        textInputPanel.add(textInputLabel5);
-        textInputPanel.add(textInputField5);
 
         contentPane.add(textInputPanel);
         contentPane.add(textInputButton);
@@ -938,9 +926,8 @@ public class Gui extends JFrame{
             input2Content = (textInputField2.getText().toString()).split("/");
             input3Content = (textInputField3.getText().toString()).split(":");
             input4Content = (textInputField4.getText().toString()).split(":");
-            input5Content = Double.parseDouble(textInputField5.getText().toString());
 
-            aula = main.modificarAulaDisciplina(input0Content, input1Content, LocalDate.of(Integer.parseInt(input2Content[0]), Integer.parseInt(input2Content[1]), Integer.parseInt(input2Content[2])), LocalTime.of(Integer.parseInt(input3Content[0]), Integer.parseInt(input3Content[1])), LocalTime.of(Integer.parseInt(input4Content[0]), Integer.parseInt(input4Content[1])), input5Content);
+            aula = main.modificarAulaDisciplina(input0Content, input1Content, LocalDate.of(Integer.parseInt(input2Content[0]), Integer.parseInt(input2Content[1]), Integer.parseInt(input2Content[2])), LocalTime.of(Integer.parseInt(input3Content[0]), Integer.parseInt(input3Content[1])), LocalTime.of(Integer.parseInt(input4Content[0]), Integer.parseInt(input4Content[1])));
 
             try {
               System.out.println(aula.get().getHorarioInicio());
@@ -953,7 +940,6 @@ public class Gui extends JFrame{
             textInputField2.setText("");
             textInputField3.setText("");
             textInputField4.setText("");
-            textInputField5.setText("");
           }
         });
 			}
@@ -1226,6 +1212,84 @@ public class Gui extends JFrame{
               }
             } catch (Exception e) {
               System.out.println("Notas do aluno não foram encontradas.");
+            }
+
+            textInputField0.setText("");
+            textInputField1.setText("");
+          }
+        });
+			}
+		});
+
+    option19.addActionListener((ActionListener) new ActionListener(){
+      Optional<Boolean> status;
+      String[] colunas = {"Status"};
+      Object[][] dados = {};
+      String input0Content;
+      int input1Content;
+
+      public void limparDados(){
+        dados = Arrays.copyOf(dados, 0);
+      }
+
+			public void actionPerformed(ActionEvent event) {
+        contentPane.removeAll();
+        contentPane.revalidate();
+        contentPane.repaint();
+
+        JPanel textInputPanel = new JPanel();
+        JLabel textInputLabel0 = new JLabel("Nome do Curso");
+        JLabel textInputLabel1 = new JLabel("Matricula do Aluno");
+        JTextField textInputField0 = new JTextField();
+        JTextField textInputField1 = new JTextField();
+        JButton textInputButton = new JButton("Enviar");
+
+        textInputField0.setPreferredSize(new Dimension(200, 24));
+        textInputField1.setPreferredSize(new Dimension(200, 24));
+
+        textInputPanel.add(textInputLabel0);
+        textInputPanel.add(textInputField0);
+        textInputPanel.add(textInputLabel1);
+        textInputPanel.add(textInputField1);
+
+        contentPane.add(textInputPanel);
+        contentPane.add(textInputButton);
+
+        textInputPanel.setLayout(new BoxLayout(textInputPanel, BoxLayout.PAGE_AXIS));
+
+        textInputButton.addActionListener((ActionListener) new ActionListener(){
+          public void actionPerformed(ActionEvent event){
+            input0Content = textInputField0.getText().toString();
+            input1Content = Integer.parseInt(textInputField1.getText().toString());
+
+            status = main.getStatusConclusaoAluno(input0Content, input1Content);
+
+            System.out.println(status.get());
+
+            try {
+              String statusAluno;
+
+              if(status.get()){
+                statusAluno = "Concluído";
+              }
+              else{
+                statusAluno = "Não concluído";
+              }
+
+              String[] statusString = {statusAluno};
+
+              dados = Arrays.copyOf(dados, (dados.length)+1);
+              dados[(dados.length)-1] = statusString;
+
+              contentPane.removeAll();
+              contentPane.revalidate();
+              contentPane.repaint();
+
+              contentPane.add(imprimirInfo(dados, colunas));
+              limparDados();
+
+            } catch (Exception e) {
+              System.out.println("Status do aluno não foi encontrado.");
             }
 
             textInputField0.setText("");

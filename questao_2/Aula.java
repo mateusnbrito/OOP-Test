@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class Aula {
   private LocalDate data;
@@ -8,11 +9,11 @@ public class Aula {
 	private double duracao;
   private Disciplina disciplina;
 
-	Aula(LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, double _duracao, Disciplina _disciplina){
+	Aula(LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, Disciplina _disciplina){
 		this.data = _data;
 		this.horarioInicio = _horarioInicio;
 		this.horarioFim = _horarioFim;
-		this.duracao = _duracao;
+		this.duracao = ((this.horarioInicio).until(this.horarioFim, MINUTES))/60;
     this.disciplina = _disciplina;
 	}
 
@@ -29,7 +30,7 @@ public class Aula {
 	}
 
 	public void setDuracao(Double _duracao){
-		this.duracao = _duracao;
+		this.duracao = ((this.horarioInicio).until(this.horarioFim, MINUTES))/60;
 	}
 
   public void setDisciplina(Disciplina _disciplina){

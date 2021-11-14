@@ -10,7 +10,6 @@ public class Main {
     Gui gui = new Gui();
 	}
 
-  // Limitar 1 docente por disciplina em um curso
   // Implementar disciplinas realizadas
   // Graduar a ex-aluno quando completar disciplinas
 
@@ -71,11 +70,20 @@ public class Main {
         }
       }
 
-      if(curso.getNome().equals(_nomeCurso) && !valorRepetido){
-        Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome, _docente);
+      if(curso.getNome().equals(_nomeCurso)){
 
-        curso.addDisciplina(novaDisciplina);
-        optionalValue = Optional.ofNullable(novaDisciplina);
+        for(int j=0; j<(curso.getDisciplinas()).length; j++){
+          if(curso.getDisciplinas()[j].getDocente().equals(_docente)){
+            valorRepetido = true;
+          }
+        }
+
+        if(!valorRepetido){
+          Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome, _docente);
+
+          curso.addDisciplina(novaDisciplina);
+          optionalValue = Optional.ofNullable(novaDisciplina);
+        }
       }
     }
 

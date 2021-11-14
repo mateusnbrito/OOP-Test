@@ -467,6 +467,7 @@ public class Gui extends JFrame{
             textInputField1.setText("");
             textInputField2.setText("");
             textInputField3.setText("");
+            textInputField4.setText("");
           }
         });
 			}
@@ -610,6 +611,7 @@ public class Gui extends JFrame{
             textInputField2.setText("");
             textInputField3.setText("");
             textInputField4.setText("");
+            textInputField5.setText("");
           }
         });
 			}

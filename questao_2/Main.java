@@ -10,27 +10,43 @@ public class Main {
     Gui gui = new Gui();
 	}
 
+  // Limitar a criação de disciplinas com o mesmo código (Entre cursos também)
+  // Implementação do docente nas disciplinas
+  // Limitar 1 docente por disciplina em um curso
+  // Implementar disciplinas realizadas
+  // Graduar a ex-aluno quando completar disciplinas
+
+  // Método que finaliza o programa
   public void fecharPrograma(){
     System.exit(0);
   }
 
+  // Método que cria um novo curso
   public Optional<Curso> criarCurso(String _nome){
     Optional<Curso> optionalValue = null;
+    Boolean cursoExistente = false;
 
-    try {
+    for(int i=0; i<cursos.length; i++){
+      Curso curso = cursos[i];
+
+      if(curso.getNome().equals(_nome)){
+        cursoExistente = true;
+      }
+    }
+
+    if(!cursoExistente){
       Curso novoCurso = new Curso(_nome);
 
       this.cursos = Arrays.copyOf(this.cursos, (this.cursos.length)+1);
       this.cursos[(this.cursos.length)-1] = novoCurso;
-
+    
       optionalValue = Optional.ofNullable(novoCurso);
-    } catch (Exception e) {
-      optionalValue = null;
     }
 
     return optionalValue;
   }
 
+  // Método que lista todos os cursos
   public Optional<Curso[]> getCursos(){
     Optional<Curso[]> optionalValue = null;
 
@@ -41,6 +57,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que cria uma nova disciplina
   public Optional<Disciplina> criarDisciplina(String _nomeCurso, int _codigo, String _sigla, String _nome){
     Optional<Disciplina> optionalValue = null;
     Boolean valorRepetido = false;
@@ -69,8 +86,7 @@ public class Main {
     return optionalValue;
   }
 
-  //REVER
-  //Criando disciplinas
+  //Função que lista todas as disciplinas de um curso
   public Optional<Disciplina[]> getDisciplinas(String _nomeCurso){
     Optional<Disciplina[]> optionalValue = null;
 
@@ -85,7 +101,7 @@ public class Main {
     return optionalValue;
   }
 
-  //REVER
+  // Método que atualiza uma disciplina de um curso
   public Optional<Disciplina> updateDisciplina(String _nomeCurso, int _antigoCodigoDisciplina, int _novoCodigoDisciplina, String _sigla, String _nome){
     Optional<Disciplina> optionalValue = null;
 
@@ -111,6 +127,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que remove uma disciplina de um curso
   public Optional<Disciplina> removeDisciplina(String _nomeCurso, int _codigoDisciplina){
     Optional<Disciplina> optionalValue = null;
     Disciplina[] disciplinas = {};
@@ -138,6 +155,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que matricula um aluno em um curso
   public Optional<Aluno> matricularAlunoCurso(String _nomeCurso, int _matriculaAluno){
     Optional<Aluno> optionalValue = null;
 
@@ -156,6 +174,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que matricula um aluno em uma disciplina
   public Optional<Aluno> matricularAlunoDisciplina(String _nomeCurso, int _codigoDisciplina, int _matriculaAluno){
     Optional<Aluno> optionalValue = null;
 
@@ -185,6 +204,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todas as aulas de um curso
   public Optional<Aula[]> listarAulasCurso(String _nomeCurso){
     Optional<Aula[]> optionalValue = null;
 
@@ -214,6 +234,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todas as aulas de uma disciplina
   public Optional<Aula[]> listarAulasDisciplina(String _nomeCurso, int _codigoDisciplina){
     Optional<Aula[]> optionalValue = null;
 
@@ -243,6 +264,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todas as aulas de um aluno
   public Optional<Aula[]> listarAulasAluno(String _nomeCurso, int _matriculaAluno){
     Optional<Aula[]> optionalValue = null;
 
@@ -278,6 +300,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todos os alunos de um curso
   public Optional<Aluno[]> listarAlunosCurso(String _nomeCurso){
     Optional<Aluno[]> optionalValue = null;
 
@@ -292,6 +315,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista o status de conclusão de um aluno
   public Optional<Boolean> getStatusConclusaoAluno(String _nomeCurso, int _numeroMatricula){
     Optional<Boolean> optionalValue = null;
     Boolean disciplinasConcluidas = false;
@@ -321,6 +345,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todos os ex-alunos de um curso
   public Optional<Aluno[]> listarExAlunosCurso(String _nomeCurso){
     Optional<Aluno[]> optionalValue = null;
 
@@ -335,6 +360,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que cria aula de uma disciplina
   public Optional<Aula> criarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, Double _duracao){
     Optional<Aula> optionalValue = null;
 
@@ -359,6 +385,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que modifica uma aula de uma disciplina
   public Optional<Aula> modificarAulaDisciplina(String _nomeCurso, int _codigoDisciplina, LocalDate _data, LocalTime _horarioInicio, LocalTime _horarioFim, Double _duracao){
     Optional<Aula> optionalValue = null;
 
@@ -388,6 +415,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que cria nota em uma disciplina
   public Optional<Nota> criarNotaDisciplina(String _nomeCurso, int _codigoDisciplina, int _matriculaAluno, Double _nota){
     Optional<Nota> optionalValue = null;
 
@@ -418,6 +446,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista notas de uma disciplina
   public Optional<Nota[]> listarNotasDisciplina(String _nomeCurso, int _codigoDisciplina){
     Optional<Nota[]> optionalValue = null;
 
@@ -440,6 +469,7 @@ public class Main {
     return optionalValue;
   }
 
+  // Método que lista todas as notas de um aluno
   public Optional<Nota[]> listarNotasAluno(String _nomeCurso, int _matriculaAluno){
     Optional<Nota[]> optionalValue = null;
 

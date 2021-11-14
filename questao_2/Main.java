@@ -10,7 +10,6 @@ public class Main {
     Gui gui = new Gui();
 	}
 
-  // Limitar a criação de disciplinas com o mesmo código (Entre cursos também)
   // Implementação do docente nas disciplinas
   // Limitar 1 docente por disciplina em um curso
   // Implementar disciplinas realizadas
@@ -65,21 +64,19 @@ public class Main {
     for(int i=0; i<cursos.length; i++){
       Curso curso = cursos[i];
 
-      if(curso.getNome().equals(_nomeCurso)){
-        for(int j=0; j<(curso.getDisciplinas()).length; j++){
-          Disciplina disciplina = curso.getDisciplinas()[j];
+      for(int j=0; j<(curso.getDisciplinas()).length; j++){
+        Disciplina disciplina = curso.getDisciplinas()[j];
 
-          if(disciplina.getCodigo() == _codigo){
-            valorRepetido = true;
-          }
+        if(disciplina.getCodigo() == _codigo){
+          valorRepetido = true;
         }
+      }
 
-        if(!valorRepetido){
-          Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome);
+      if(curso.getNome().equals(_nomeCurso) && !valorRepetido){
+        Disciplina novaDisciplina = new Disciplina(_codigo, _sigla, _nome);
 
-          curso.addDisciplina(novaDisciplina);
-          optionalValue = Optional.ofNullable(novaDisciplina);
-        }
+        curso.addDisciplina(novaDisciplina);
+        optionalValue = Optional.ofNullable(novaDisciplina);
       }
     }
 
